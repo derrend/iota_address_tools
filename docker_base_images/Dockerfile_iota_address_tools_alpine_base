@@ -1,0 +1,13 @@
+FROM alpine:3.8
+
+#RUN apk update && \
+RUN apk add --no-cache \
+        py3-pip \
+        python3-dev \
+        openssl-dev \
+        libffi-dev \
+        build-base && \
+#
+    pip3 install --upgrade pip && \
+    pip3 install pyota && \
+    pip3 install pyota [ccurl]
