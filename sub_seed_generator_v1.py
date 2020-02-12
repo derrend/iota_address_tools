@@ -51,10 +51,7 @@ def seed_generate(secret, seed_start=0, seed_stop=1):
     random.seed(secret)
 
     for depth in range(seed_start, seed_stop):
-        seed = ''
-
-        while len(seed) < 81:  # Value represents iota seed length
-            seed = seed + alphas[random.randrange(27)]
+        seed = "".join([alphas[random.randrange(27)] for i in range(81)])
 
         yield seed
 
