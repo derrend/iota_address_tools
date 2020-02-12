@@ -48,7 +48,7 @@ def seed_generate(secret, seed_start=0, seed_stop=1):
 
     # Set alphas and initialise pseudo random number generator
     alphas = (string.ascii_uppercase + '9')
-    random.seed(secret)
+    random.seed(secret, version=2)
 
     for depth in range(seed_start, seed_stop):
         seed = "".join([alphas[random.randrange(27)] for i in range(81)])
