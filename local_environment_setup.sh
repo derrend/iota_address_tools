@@ -6,8 +6,8 @@ apt update && \
 apt install -y python3-dev libtool python3-venv && \
 python3 -m venv venv && \
 source venv/bin/activate && \
-pip3 install --upgrade pip && \
-pip3 install PyOpenSSL pyota pyota[ccurl] docker-compose
+python3 -m pip install --upgrade pip && \
+python3 -m pip install PyOpenSSL pyota pyota[ccurl] docker-compose
 if [ $? = 0 ]; then
     echo Local environment setup successfully.
 fi

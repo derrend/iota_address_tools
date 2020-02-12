@@ -8,6 +8,5 @@ RUN apk add --no-cache \
         libffi-dev \
         build-base && \
 #
-    pip3 install --upgrade pip && \
-    pip3 install pyota && \
-    pip3 install pyota [ccurl]
+    python3 -m pip install --upgrade pip && \
+    python3 -m pip install pyota pyota[ccurl]

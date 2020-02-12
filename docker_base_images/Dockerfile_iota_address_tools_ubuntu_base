@@ -3,7 +3,5 @@ FROM ubuntu:18.04
 RUN apt-get update && \
     apt-get install -y python3-pip && \
 #
-    pip3 install --upgrade pip && \
-    pip3 install PyOpenSSL && \ # added to 18.04 build to solve incompatibility
-    pip3 install pyota && \
-    pip3 install pyota[ccurl]
+    python3 -m pip install --upgrade pip && \  # PyOpenSSL added to 18.04 build to solve incompatibility
+    python3 -m pip install PyOpenSSL pyota pyota[ccurl]
