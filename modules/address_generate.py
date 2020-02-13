@@ -3,7 +3,7 @@
 from iota.crypto.addresses import AddressGenerator
 
 
-def address_generate(seed, address_start=0, address_depth=1):
+def address_generator(seed, address_start=0, address_depth=1):
     """Generates iota addresses from a given seed to a desired depth
 
     Type:

@@ -4,7 +4,7 @@ import random
 import string
 
 
-def seed_generate(secret, seed_start=0, seed_stop=1):
+def seed_generator(secret, seed_start=0, seed_stop=1):
     """Generates iota seeds from a given secret to a desired depth
 
     Type:

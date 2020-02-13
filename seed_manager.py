@@ -5,8 +5,8 @@ import random
 from sys import argv
 
 # Modules
-from modules.seed_generator import seed_generate
-from modules.address_generator import address_generate
+from modules.seed_generate import seed_generator
+from modules.address_generate import address_generator
 
 
 def help_text():
@@ -49,17 +49,17 @@ if __name__ == '__main__':
             secret = "".join([random.choice(string.ascii_letters + string.digits) for i in range(64)])
             print('Secret:', secret)
 
-            seed = next(seed_generate(secret))
+            seed = next(seed_generator(secret))
             print('Seed 0:', seed)
 
-            address_generate(seed)
+            address_generator(seed)
 
         # Generate seed from secret
         else:
-            seed = next(seed_generate(argv[1]))
+            seed = next(seed_generator(argv[1]))
             print('Seed 0:', seed)
 
-            address_generate(seed)
+            address_generator(seed)
 
     # (secret, seed_start=0, seed_stop=1, address_start=0, address_depth=1)
     if len(argv) > 2:
@@ -69,12 +69,12 @@ if __name__ == '__main__':
 
         # Seed target
         elif len(argv) == 3:
-            seed = next(seed_generate(argv[1], int(argv[2]), int(argv[2]) + 1))
+            seed = next(seed_generator(argv[1], int(argv[2]), int(argv[2]) + 1))
             print('Seed {}:'.format(argv[2]), seed)
 
         # Seed range
         elif len(argv) == 4:
-            sg = seed_generate(argv[1], int(argv[2]), int(argv[3]))
+            sg = seed_generator(argv[1], int(argv[2]), int(argv[3]))
 
             count = int(argv[2])
             for seed in sg:
@@ -83,25 +83,25 @@ if __name__ == '__main__':
 
         # Address target
         elif len(argv) == 5:
-            sg = seed_generate(argv[1], int(argv[2]), int(argv[3]))
+            sg = seed_generator(argv[1], int(argv[2]), int(argv[3]))
 
             count = int(argv[2])
             for seed in sg:
                 print('Seed {}:'.format(count), seed)
 
-                address_generate(seed, int(argv[4]))
+                address_generator(seed, int(argv[4]))
                 count += 1
 
         # Address depth
         elif len(argv) == 6:
-            sg = seed_generate(argv[1], int(argv[2]), int(argv[3]))
+            sg = seed_generator(argv[1], int(argv[2]), int(argv[3]))
 
             count = int(argv[2])
             for seed in sg:
                 print('Seed {}:'.format(count), seed)
 
                 if not int(argv[5]) == 0:
-                    address_generate(seed, int(argv[4]), int(argv[5]))
+                    address_generator(seed, int(argv[4]), int(argv[5]))
 
                 count += 1
 

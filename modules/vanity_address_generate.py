@@ -5,13 +5,13 @@ import random
 import string
 
 # Modules
-from modules.seed_generator import seed_generate
+from modules.seed_generate import seed_generator
 
 # Third party
 from iota.crypto.addresses import AddressGenerator
 
 
-def vanity_address_generate(vanity_text, report_interval=False):
+def vanity_address_generator(vanity_text, report_interval=False):
     """Generates iota seed whose first subaddress begins with vanity_text
 
     Type:
@@ -40,7 +40,7 @@ def vanity_address_generate(vanity_text, report_interval=False):
     count = 0
     while True:
         secret = "".join([random.choice(string.ascii_letters + string.digits) for i in range(64)])
-        seed = next(seed_generate(secret, 0, 1))
+        seed = next(seed_generator(secret, 0, 1))
 
         ag = AddressGenerator(seed, checksum=True)
         address = str(ag.get_addresses(0)[0])

@@ -258,6 +258,19 @@ Run tests.
 (venv) $ python3 -m unittest
 ```
 ```
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+```
+
+Run test for specific module.
+
+```
+$ python3 -m unittest tests/test_seed_manager.py
+```
+```
 .
 ----------------------------------------------------------------------
 Ran 1 test in 0.000s
