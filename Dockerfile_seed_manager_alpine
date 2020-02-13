@@ -1,0 +1,9 @@
+FROM iota_address_tools_base:alpine
+
+COPY modules/seed_generator.py modules/address_generator.py /iota_address_tools/modules/
+COPY seed_manager.py /iota_address_tools/
+
+WORKDIR /iota_address_tools/
+
+ENTRYPOINT ["/usr/bin/python3", "seed_manager.py"]
+CMD ["help"]

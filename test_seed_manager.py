@@ -1,5 +1,5 @@
 import unittest
-import sub_seed_generator_v1 as f
+import seed_manager as f
 
 class TestSubSeedAddressGenerator(unittest.TestCase):
     def test_seed_generate(self):

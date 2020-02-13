@@ -4,8 +4,9 @@ import string
 import random
 from sys import argv
 
-# Third party
-from iota.crypto.addresses import AddressGenerator
+# Modules
+from modules.seed_generator import seed_generate
+from modules.address_generator import address_generate
 
 
 def help_text():
@@ -25,60 +26,6 @@ def reserved_text():
     'help' and 'random' cannot be used as secrets
     '''
     print(text)
-
-
-def seed_generate(secret, seed_start=0, seed_stop=1):
-    """Generates iota seeds from a given secret to a desired depth
-
-    Type:
-        Generator
-
-    Args:
-        secret  (str object, required) string object
-        seed_start  (int object, required) integer defining subseed starting point
-        seed_stop  (int object, required) integer defining subseed ending point
-
-    Yields:
-        string object (str): 90 character iota seed
-    """
-
-    # Tests
-    if seed_start < 0 or seed_stop < 0:
-        raise ValueError('Seed index cannot be negative')
-
-    # Set alphas and initialise pseudo random number generator
-    alphas = (string.ascii_uppercase + '9')
-    random.seed(secret, version=2)
-
-    for depth in range(seed_start, seed_stop):
-        seed = "".join([alphas[random.randrange(27)] for i in range(81)])
-
-        yield seed
-
-
-def address_generate(seed, address_start=0, address_depth=1):
-    """Generates iota addresses from a given seed to a desired depth
-
-    Type:
-        Function
-
-    Args:
-        secret  (str object, required) 81 character iota seed
-        seed_start  (int object, required) integer defining subaddress starting point
-        seed_start  (int object, required) integer defining subaddress ending point
-
-    Returns:
-        None
-    """
-
-    count = address_start
-    ag = AddressGenerator(seed, checksum=True)
-
-    for address in ag.get_addresses(address_start, address_depth):
-        print('Address {}:'.format(count), address)
-        count += 1
-
-    print()
 
 
 # # Debug

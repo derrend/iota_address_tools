@@ -1,8 +1,0 @@
-FROM iota_address_tools:base
-
-COPY sub_seed_generator_v1.py /iota_address_tools/
-
-WORKDIR /iota_address_tools/
-
-ENTRYPOINT ["/usr/bin/python3", "sub_seed_generator_v1.py"]
-CMD ["help"]

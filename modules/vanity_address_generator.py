@@ -1,24 +1,17 @@
 #!/usr/bin/python3
+# Builtins
 import datetime
 import random
 import string
-from sys import argv
 
-from sub_seed_generator_v1 import seed_generate
+# Modules
+from modules.seed_generator import seed_generate
+
+# Third party
 from iota.crypto.addresses import AddressGenerator
 
-def help_text():
-    text = '''
-    Keywords:
-    help    Displays help text
 
-    Arguments:
-    (vanity_text, report_interval)
-    '''
-    print(text)
-
-
-def vanity_seed_generator(vanity_text, report_interval=False):
+def vanity_address_generate(vanity_text, report_interval=False):
     """Generates iota seed whose first subaddress begins with vanity_text
 
     Type:
@@ -32,9 +25,18 @@ def vanity_seed_generator(vanity_text, report_interval=False):
         None
     """
 
+    # Tests
     if report_interval < 0:
         raise ValueError('Report interval cannot be negative')
 
+    if type(vanity_text) is not str:
+        raise TypeError('Vanity text must be type str')
+
+    for char in vanity_text.upper():
+        if char not in string.ascii_uppercase + '9':
+            raise ValueError('Vanity text must only contain chars A-Z and 9')
+
+    # Brute force loop
     count = 0
     while True:
         secret = "".join([random.choice(string.ascii_letters + string.digits) for i in range(64)])
@@ -52,24 +54,9 @@ def vanity_seed_generator(vanity_text, report_interval=False):
             print()
             break
 
+        # Report
         if report_interval:
             if count % int(report_interval) == 0:
                 print('Count:   ', str(count) + '\t', datetime.datetime.now() - datetime.timedelta(hours=-10))
 
         count += 1
-
-# # Debug
-# print(len(argv))
-# for i in argv: print(i)
-
-if __name__ == '__main__':
-    if len(argv) is 1:
-        help_text()
-    elif len(argv) is 2 and argv[1].lower() == 'help':
-        help_text()
-    elif len(argv) is 2:
-        vanity_seed_generator(argv[1].upper())
-    elif len(argv) is 3:
-        vanity_seed_generator(argv[1].upper(), int(argv[2]))
-    else:
-        raise TypeError('{} takes from 0 to 2 positional arguments but {} were given'.format(argv[0], len(argv) - 1))
