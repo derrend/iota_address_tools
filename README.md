@@ -2,9 +2,9 @@
 
 Useful tools geared towards iota seed and address manipulation.
 
-##### sub_seed_generator_v1.py (deterministic iota seed generator)
+##### seed_manager.py (deterministic iota seed generator)
 
-##### vanity_seed_finder.py (searches for custom seeds via brute force)
+##### vanity_address_manager.py (searches for custom addresses via brute force)
 
 ### Prerequisites
 
@@ -41,12 +41,12 @@ $
 
 These instructions will get you a copy of the project up and running on your local machine.
 
-### Examples: sub_seed_generator_v1
+### Examples: seed_manager 
 
 Help text.
 
 ```
-(venv) $ python3 sub_seed_generator_v1.py help
+(venv) $ python3 seed_manager.py help
 ```
 ```
 Keywords:
@@ -60,7 +60,7 @@ Arguments:
 Generateing a seed with a random secret.
 
 ```
-(venv) $ python3 sub_seed_generator_v1.py random
+(venv) $ python3 seed_manager.py random
 ```
 ```
 Secret: MCLRd4qGH8mBTOaFuWbgtdeWkpKbYD2asT9aRG5TrBiCCzwT1o2aFyWwnNxCAKQj
@@ -71,7 +71,7 @@ Address 0: TMHPBPH9YPPNQISB9PERDITWYCXTAVIFOBVMLNKVQHRCDQCLMQC9KZRZMUNLTHRUMUTIR
 Generating a seed from a secret.
 
 ```
-(venv) $ python3 sub_seed_generator_v1.py secret_string
+(venv) $ python3 seed_manager.py secret_string
 ```
 ```
 Seed 0: IOGUZJHRYMCV9KJYM9OCWFSQMMPHPMYQGXXYMIPZFNYT9SMXVRFNYODNHSQAHEMEFBHXOMJZRHHCFNIBF
@@ -81,7 +81,7 @@ Address 0: WVHLVAVASWRMGTFQAEDSROMDXMJZPVRCGPZYJPYUMPOYDFLGTRLBZYGDRCEDVGVYJWZ9F
 Generating a seed with specific index.
 
 ```
-(venv) $ python3 sub_seed_generator_v1.py secret_string 1
+(venv) $ python3 seed_manager.py secret_string 1
 ```
 ```
 Seed 1: IOGUZJHRYMCV9KJYM9OCWFSQMMPHPMYQGXXYMIPZFNYT9SMXVRFNYODNHSQAHEMEFBHXOMJZRHHCFNIBF
@@ -90,7 +90,7 @@ Seed 1: IOGUZJHRYMCV9KJYM9OCWFSQMMPHPMYQGXXYMIPZFNYT9SMXVRFNYODNHSQAHEMEFBHXOMJZ
 Generating multiple seeds.
 
 ```
-(venv) $ python3 sub_seed_generator_v1.py secret_string 0 3
+(venv) $ python3 seed_manager.py secret_string 0 3
 ```
 ```
 Seed 0: IOGUZJHRYMCV9KJYM9OCWFSQMMPHPMYQGXXYMIPZFNYT9SMXVRFNYODNHSQAHEMEFBHXOMJZRHHCFNIBF
@@ -100,7 +100,7 @@ Seed 2: 9KQUQVMGBZHQVVSN9RZXYKKNQWIPLD9VGWKAYEDDPXKRBFDYFZOUGXUKWJCNDLVOISMCBIHX
 
 Generating multiple seeds with specific address index.
 ```
-(venv) $ python3 sub_seed_generator_v1.py secret_string 0 3 1
+(venv) $ python3 seed_manager.py secret_string 0 3 1
 ```
 ```
 Seed 0: IOGUZJHRYMCV9KJYM9OCWFSQMMPHPMYQGXXYMIPZFNYT9SMXVRFNYODNHSQAHEMEFBHXOMJZRHHCFNIBF
@@ -115,7 +115,7 @@ Address 1: EVKLCKQJAPCSZUTJRRJMLKFXFNUXENIPCOTOBYDEOMKC9IFJMY9TJDXNANXSEHKGOXOIS
 
 Generating multiple seeds with multiple address indexes.
 ```
-(venv) $ python3 sub_seed_generator_v1.py secret_string 0 3 0 3
+(venv) $ python3 seed_manager.py secret_string 0 3 0 3
 ```
 ```
 Seed 0: IOGUZJHRYMCV9KJYM9OCWFSQMMPHPMYQGXXYMIPZFNYT9SMXVRFNYODNHSQAHEMEFBHXOMJZRHHCFNIBF
@@ -138,7 +138,7 @@ Address 2: YMCA9AXTDJIZJSNTCJGALBKQRLGRWVOMTWOYRVOCDDGJVXKRTKSISNOCQTJP9VKQIFCXQ
 
 Help text.
 ```
-(venv) $ python3 vanity_seed_finder.py help
+(venv) $ python3 vanity_address_manager.py help
 ```
 ```
 Keywords:
@@ -151,7 +151,7 @@ Arguments:
 Vanity seed search silent.
 
 ```
-(venv) $ python3 vanity_seed_finder.py xx
+(venv) $ python3 vanity_address_manager.py xx
 ```
 ```
 Count:    368
@@ -163,7 +163,7 @@ Address:  XXCAAYIKAOFFLTNMIKRKFRKFJGUAQZYWMWVXXOEERUYFNZRKREIKDGJHIZWNKCHQHINQXR
 Vanity seed search with progress reports.
 
 ```
-(venv) $ python3 vanity_seed_finder.py yy 100
+(venv) $ python3 vanity_address_manager.py yy 100
 ```
 ```
 Count:    0	 2020-02-08 22:18:12.894056
@@ -185,14 +185,14 @@ Make sure you have Docker installed first. Instructions available [here](https:/
 
 ### Build images locally
 
-The container is built upon an alpine image by default.
+The container is built upon an alpine image by default but you can enable ubuntu builds by editing the `docker-compose.yml` file.
 
 ```
 (venv) $ docker-compose build
 ```
 ```
 Successfully built cc90ac45738e
-Successfully tagged sub_seed_generator:v1
+Successfully tagged seed_manager:alpine
 ```
 
 View the containers.
@@ -201,15 +201,16 @@ View the containers.
 $ docker images
 ```
 ```
-REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
-sub_seed_generator       v1                  cc90ac45738e        19 seconds ago      281MB
-iota_address_tools       base                c3cc8d1ea2e7        20 seconds ago      281MB
+REPOSITORY                TAG                 IMAGE ID            CREATED              SIZE
+vanity_address_manager    alpine              47d85e7db405        About a minute ago   281MB
+seed_manager              alpine              96c6d1c4b212        About a minute ago   281MB
+iota_address_tools_base   alpine              4926fee19dc3        About a minute ago   281MB
 ```
 
 The container accepts commands similar to previous examples.
 
 ```
-(venv) $ docker-compose run --rm sub_seed_generator_v1 secret_string
+(venv) $ docker-compose run --rm seed_manager:alpine secret_string
 ```
 ```
 Seed 0: IOGUZJHRYMCV9KJYM9OCWFSQMMPHPMYQGXXYMIPZFNYT9SMXVRFNYODNHSQAHEMEFBHXOMJZRHHCFNIBF
@@ -224,7 +225,7 @@ and delete all traces of itself when exited.
 Drop into disposable container.
 
 ```
-(venv) $ docker-compose run --rm --entrypoint sh sub_seed_generator_v1
+(venv) $ docker-compose run --rm --entrypoint sh seed_manager:alpine
 ```
 ```
 #
@@ -233,7 +234,7 @@ Drop into disposable container.
 Run commands similar to previous examples.
 
 ```
-# python3 sub_seed_generator_v1.py secret_string
+# python3 seed_manager.py secret_string
 ```
 ```
 Seed 0: IOGUZJHRYMCV9KJYM9OCWFSQMMPHPMYQGXXYMIPZFNYT9SMXVRFNYODNHSQAHEMEFBHXOMJZRHHCFNIBF
