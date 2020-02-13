@@ -1,6 +1,6 @@
 FROM iota_address_tools_base:alpine
 
-COPY modules/seed_generate.py modules/vanity_address_generator.py /iota_address_tools/modules/
+COPY modules/seed_generate.py modules/vanity_address_generate.py /iota_address_tools/modules/
 COPY vanity_address_manager.py /iota_address_tools/
 
 WORKDIR /iota_address_tools/
