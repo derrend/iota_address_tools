@@ -28,7 +28,11 @@ def reserved_text():
     print(text)
 
 
-def main(argv):
+# # Debug
+# print(len(argv))
+# for i in argv: print(i)
+
+if __name__ == '__main__':
     # ()
     if len(argv) == 1:
         help_text()
@@ -103,11 +107,3 @@ def main(argv):
         # Too many arguments
         else:
             raise TypeError('{} takes from 0 to 5 positional arguments but {} were given'.format(argv[0], len(argv) - 1))
-
-
-# # Debug
-# print(len(argv))
-# for i in argv: print(i)
-
-if __name__ == '__main__':
-    main(argv)
